@@ -2,3 +2,12 @@ name: 'AltruismGifts'
 main: 'com.bapcraft.altruismgifts.AltruismGifts'
 author: 'treyzania'
 version: '0.0.1'
+commands:
+    gift:
+        aliases: []
+        description: 'Sends someone a gift, as long as they're online!'
+        usage: '/gift <username>'
+    togglegift:
+        alias: [tg]
+        description: 'Toggles whether or not people can send you gifts.'
+        usage: '/togglegift'
