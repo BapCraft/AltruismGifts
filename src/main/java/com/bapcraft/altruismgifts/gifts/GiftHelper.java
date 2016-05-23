@@ -67,8 +67,10 @@ public class GiftHelper {
 			rpi.setItem(destSlot, source);
 			
 			// Up the stats.
-			sender.giftsReceived++;
 			sender.giftsSent++;
+			reciever.giftsReceived++;
+			sender.save();
+			reciever.save();
 			
 			return GiftingResult.SUCCESS;
 			
