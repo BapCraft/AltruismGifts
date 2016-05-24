@@ -22,7 +22,7 @@ public class GiftProfile {
 	
 	private transient OfflinePlayer player;
 	
-	protected boolean isAllowing = true;
+	public boolean isAllowing = true;
 	protected int giftsSent, giftsReceived;
 	
 	public OfflinePlayer getPlayer() {
