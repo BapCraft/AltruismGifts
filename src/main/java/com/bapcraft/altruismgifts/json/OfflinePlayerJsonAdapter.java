@@ -23,7 +23,10 @@ public class OfflinePlayerJsonAdapter implements JsonSerializer<OfflinePlayer>, 
 	
 	@Override
 	public OfflinePlayer deserialize(JsonElement ele, Type type, JsonDeserializationContext ctx) throws JsonParseException {
-		return Bukkit.getOfflinePlayer(UUID.fromString(ele.getAsString()));
+		
+		OfflinePlayer op = Bukkit.getOfflinePlayer(UUID.fromString(ele.getAsString()));
+		return op.isOnline() ? op.getPlayer() : op;
+		
 	}
 	
 }
