@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -64,7 +65,7 @@ public class GiftProfile {
 		
 	}
 	
-	public GiftProfile load(UUID uuid) {
+	public static GiftProfile load(UUID uuid) {
 		
 		try {
 			
@@ -77,17 +78,22 @@ public class GiftProfile {
 			
 		} catch (FileNotFoundException e) {
 			
-			if (this.player.isOnline()) {
-				
-				Player p = this.player.getPlayer();
-				p.sendMessage("" + ChatColor.RED + "Something happened when loading your Gift information.  Your gift(s) probably didn't send and you should notify an admin about this message.");
-				
+			Player p = Bukkit.getPlayer(uuid);
+			
+			if (p != null) {
+				p.sendMessage("" + ChatColor.RED
+						+ "Something happened when loading your Gift information.  "
+						+ "Your gift(s) probably didn't send and you should notify an admin about this message.");
 			}
 			
-			throw new NullPointerException("Something happened for player " + this.player.getUniqueId().toString() + "! (loading)");
+			throw new NullPointerException("Something happened for player " + uuid.toString() + "! (loading)");
 			
 		}
 		
+	}
+	
+	public static GiftProfile load(OfflinePlayer op) {
+		return load(op.getUniqueId());
 	}
 	
 	public File getDataFile() {

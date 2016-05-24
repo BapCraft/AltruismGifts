@@ -7,7 +7,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class GiftHelper {
 	
-	public GiftingResult trySendGift(ItemStack item, GiftProfile sender, GiftProfile reciever) {
+	public static GiftingResult trySendGift(ItemStack item, GiftProfile sender, GiftProfile reciever) {
 		
 		if (reciever.isAllowing) {
 			
