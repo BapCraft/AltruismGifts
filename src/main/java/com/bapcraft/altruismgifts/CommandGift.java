@@ -1,6 +1,7 @@
 package com.bapcraft.altruismgifts;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.bapcraft.altruismgifts.gifts.GiftHelper;
 import com.bapcraft.altruismgifts.gifts.GiftProfile;
 import com.bapcraft.altruismgifts.gifts.GiftingResult;
+
 import static com.bapcraft.altruismgifts.AltruismGifts.message;
 
 public class CommandGift implements CommandExecutor {
@@ -71,6 +73,7 @@ public class CommandGift implements CommandExecutor {
 			case SUCCESS:
 				
 				message(sender, "Success!  You sent a gift to: " + recer.getDisplayName());
+				message(recer, "You were sent a gift by " + snder.getDisplayName() + ChatColor.LIGHT_PURPLE + "!");
 				break;
 				
 			default:
