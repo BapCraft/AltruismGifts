@@ -1,5 +1,6 @@
 package com.bapcraft.altruismgifts;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +21,11 @@ public class AltruismGifts extends JavaPlugin {
 	public void onDisable() {
 		
 		INSTANCE = null;
+		
+		this.getCommand("gift").setExecutor(new CommandGift());
+		this.getCommand("togglegift").setExecutor(new CommandToggleGifts());
+		
+		Bukkit.getLogger().info(this.getName() + " is now ready to spread the love!");
 		
 	}
 	
