@@ -4,10 +4,8 @@ author: 'treyzania'
 version: '0.0.1'
 commands:
     gift:
-        aliases: []
-        description: 'Sends someone a gift, as long as they\'re online!'
+        description: Sends someone a gift, as long as they're online!
         usage: '/gift <username>'
     togglegift:
-        aliases: [tg]
-        description: 'Toggles whether or not people can send you gifts.'
+        description: Toggles whether or not people can send you gifts.
         usage: '/togglegift'
