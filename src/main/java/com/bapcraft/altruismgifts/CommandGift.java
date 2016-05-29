@@ -34,6 +34,7 @@ public class CommandGift implements CommandExecutor {
 		if (recer == null) {
 			
 			message(sender, "That player isn't online!");
+			return true;
 			
 		}
 		
