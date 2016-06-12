@@ -15,12 +15,7 @@ public class AltruismGifts extends JavaPlugin {
 		
 		INSTANCE = this;
 		
-	}
-	
-	@Override
-	public void onDisable() {
-		
-		INSTANCE = null;
+		this.saveDefaultConfig();
 		
 		this.getCommand("gift").setExecutor(new CommandGift());
 		this.getCommand("togglegift").setExecutor(new CommandToggleGifts());
@@ -29,8 +24,15 @@ public class AltruismGifts extends JavaPlugin {
 		
 	}
 	
+	@Override
+	public void onDisable() {
+		
+		INSTANCE = null;
+		
+	}
+	
 	public static String formatMessage(String message) {
-		return String.format("%s " + ChatColor.LIGHT_PURPLE, PREFIX, message);
+		return String.format("%s %s" + ChatColor.LIGHT_PURPLE, PREFIX, message);
 	}
 	
 	public static void message(CommandSender sender, String msg) {

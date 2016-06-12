@@ -46,7 +46,15 @@ public class GiftProfile {
 		try {
 			
 			// Write it.
-			FileWriter fw = new FileWriter(this.getDataFile());
+			File f = this.getDataFile();
+			if (!f.exists()) {
+				
+				f.getParentFile().mkdirs();
+				f.createNewFile();
+				
+			}
+			
+			FileWriter fw = new FileWriter(f);
 			fw.write(data);
 			fw.close();
 			
@@ -67,6 +75,8 @@ public class GiftProfile {
 	
 	public static GiftProfile load(UUID uuid) {
 		
+		GiftProfile gp = null;
+		
 		try {
 			
 			// Get the reader.
@@ -74,21 +84,16 @@ public class GiftProfile {
 			
 			// Deserialize.
 			Gson gson = buildGson();
-			return gson.fromJson(fr, GiftProfile.class);
+			gp = gson.fromJson(fr, GiftProfile.class);
 			
 		} catch (FileNotFoundException e) {
 			
-			Player p = Bukkit.getPlayer(uuid);
-			
-			if (p != null) {
-				p.sendMessage("" + ChatColor.RED
-						+ "Something happened when loading your Gift information.  "
-						+ "Your gift(s) probably didn't send and you should notify an admin about this message.");
-			}
-			
-			throw new NullPointerException("Something happened for player " + uuid.toString() + "! (loading)");
+			gp = new GiftProfile(); 
 			
 		}
+		
+		gp.player = Bukkit.getOfflinePlayer(uuid); // Populate this so items can be sent back and forth and such.
+		return gp;
 		
 	}
 	

@@ -1,18 +1,18 @@
 package com.bapcraft.altruismgifts;
 
+import static com.bapcraft.altruismgifts.AltruismGifts.message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import com.bapcraft.altruismgifts.gifts.GiftHelper;
 import com.bapcraft.altruismgifts.gifts.GiftProfile;
 import com.bapcraft.altruismgifts.gifts.GiftingResult;
-
-import static com.bapcraft.altruismgifts.AltruismGifts.message;
 
 public class CommandGift implements CommandExecutor {
 	
@@ -38,11 +38,20 @@ public class CommandGift implements CommandExecutor {
 			
 		}
 		
-		GiftProfile sp = GiftProfile.load(recer);
-		GiftProfile rp = GiftProfile.load(snder);
+		GiftProfile sp = GiftProfile.load(snder);
+		GiftProfile rp = GiftProfile.load(recer);
 		
-		ItemStack is = snder.getInventory().getItemInMainHand();
-		GiftingResult gr = GiftHelper.trySendGift(is, sp, rp);
+		PlayerInventory pi = snder.getInventory(); 
+		int slot = pi.getHeldItemSlot();
+		
+		if (pi.getItem(slot) == null) {
+			
+			message(sender, "There's nothing in your hand!");
+			return true;
+			
+		}
+		
+		GiftingResult gr = GiftHelper.directSend(slot, sp, rp);
 		
 		switch (gr) {
 			
@@ -73,7 +82,7 @@ public class CommandGift implements CommandExecutor {
 				
 			case SUCCESS:
 				
-				message(sender, "Success!  You sent a gift to: " + recer.getDisplayName());
+				message(sender, "Success!  You gifted: " + recer.getDisplayName());
 				message(recer, "You were sent a gift by " + snder.getDisplayName() + ChatColor.LIGHT_PURPLE + "!");
 				break;
 				
